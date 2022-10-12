@@ -6,6 +6,7 @@ const ProtectedRoutes = () => {
   let handler = () => {
     setAuth(true);
   };
+  console.log(handler);
 
   return auth ? <Outlet /> : <Navigate to="/login" />;
 };
