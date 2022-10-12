@@ -1,5 +1,5 @@
-import React from "react";
-
+import React  from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   return (
@@ -22,9 +22,9 @@ function Login() {
         </label>
         <input type="password" className="form-control" id="password" />
 
-        <button className="btn btn-primary" onClick={() => {}}>
-          Login
-        </button>
+        <Link to="/">
+          <button className="btn btn-success form-control">Login</button>
+        </Link>
       </form>
     </div>
   );

@@ -20,13 +20,14 @@ function NavBar(props) {
   return (
     <div>
       <div className="row">
-        <nav className="navbar bg-dark col">
+        <nav className="navbar bg-dark">
           <div className="container">
-            <a className="navbar-brand col" style={{ color: "white" }} href="/">
+            <a className="col navbar-brand " style={{ color: "white" }} href="/">
               My Movies
             </a>
-
+            <button className=" col-1 btn btn-success" onClick={props.topRated} style={{'margin':'10px'}}>Top Rated </button>
             <form className="d-flex" role="search">
+              
               <input
                 className="col form-control me-2"
                 type="search"
