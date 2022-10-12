@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import NavBar from "./Components/NavBar";
 import MovieComponent from "./Components/MovieComponent";
+import Login from "./Components/Login";
+import ProtectedRoutes from "./Components/Auth";
 
 const api =
   "https://api.themoviedb.org/3/movie/popular?api_key=56b1d7398d1dc64df526a3995b2c8425";
@@ -8,6 +12,15 @@ const api =
 function App() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    fetch(api)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.results);
+        setMovies(data.results);
+      });
+  }, []);
 
   const searchMovie = async (e) => {
     e.preventDefault();
@@ -24,48 +37,16 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    fetch(api)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.results);
-        setMovies(data.results);
-      });
-  }, []);
-
   return (
     <div>
-      <div className="row">
-        <nav className="navbar bg-dark col">
-          <div className="container">
-            <a
-              className="navbar-brand col"
-              style={{ color: "white" }}
-              href="sa"
-            >
-              My Movies
-            </a>
-            <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-              <button
-                className="btn btn-outline-success"
-                type="submit"
-                style={{ color: "white" }}
-                onClick={searchMovie}
-              >
-                Search
-              </button>
-            </form>
-          </div>
-        </nav>
-      </div>
+      <NavBar
+        movies={movies}
+        query={query}
+        setQuery={setQuery}
+        setMovies={setMovies}
+        searchMovie={searchMovie}
+        api={api}
+      />
       <div className="container">
         <div className="row">
           {movies.length === 0 ? (
@@ -78,10 +59,18 @@ function App() {
           ) : (
             movies.map((movie) => (
               <div className="col-md-4" key={movie.id}>
-                <MovieComponent details={movie} />
+                <Routes>
+                  <Route element={<ProtectedRoutes/>}>
+                  <Route path="/"element={<MovieComponent details={movie} />}/> 
+                  </Route>
+                </Routes>
               </div>
             ))
           )}
+
+          <Routes>
+            <Route path="/login" element={<Login />} />
+          </Routes>
         </div>
       </div>
     </div>
