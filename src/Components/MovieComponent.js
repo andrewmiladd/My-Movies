@@ -2,7 +2,7 @@ import React from "react";
 
 function MovieComponent(props) {
   const image = `https://image.tmdb.org/t/p/w500/${props.details.backdrop_path}`;
-  
+
   return (
     <div>
       <div className=" card ">
@@ -23,6 +23,7 @@ function MovieComponent(props) {
             {props.details.vote_average}
           </h5>
         </div>
+
         <p className="card-text" style={{ padding: "20px", margin: "5px" }}>
           {props.details.overview}
         </p>

@@ -22,12 +22,21 @@ function NavBar(props) {
       <div className="row">
         <nav className="navbar bg-dark">
           <div className="container">
-            <a className="col navbar-brand " style={{ color: "white" }} href="/">
+            <a
+              className="col-lg-7 navbar-brand "
+              style={{ color: "white" }}
+              href="/"
+            >
               My Movies
             </a>
-            <button className=" col-1 btn btn-success" onClick={props.topRated} style={{'margin':'10px'}}>Top Rated </button>
+            <button
+              className=" col-lg-1 btn btn-success"
+              onClick={props.topRated}
+              style={{ margin: "10px" }}
+            >
+              Top Rated
+            </button>
             <form className="d-flex" role="search">
-              
               <input
                 className="col form-control me-2"
                 type="search"
@@ -45,7 +54,7 @@ function NavBar(props) {
                 Search
               </button>
             </form>
-            <Link to="/login" className="col-lg-1">
+            <Link to="/login" className="col-lg">
               Login
             </Link>
           </div>
